@@ -1,36 +1,126 @@
-# Exclude everything
+# =============================================================================
+# Production .vscodeignore for Asri AI VS Code Extension
+#
+# Strategy: exclude everything, then explicitly re-include only runtime-critical
+# artifacts. Never use !**/*.map — it pulls all source maps into the package.
+# =============================================================================
+
+# Exclude everything by default
 **
 
-# Include README.md, CHANGELOG.md and LICENSE
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Extension metadata
+# ─────────────────────────────────────────────────────────────────────────────
+!package.json
+!package.nls.json
+!package.nls.*.json
 !README.md
 !CHANGELOG.md
 !LICENSE
 
-# Include package.json
-!package.json
-!package.nls.*
 
-# Include the built extension
-!dist
+# ─────────────────────────────────────────────────────────────────────────────
+# Extension main bundle
+# ─────────────────────────────────────────────────────────────────────────────
+!dist/extension.js
+# dist/extension.js.map is intentionally excluded (15 MB, no runtime value).
 
-# Include the built webview
-!**/*.map
-!webview-ui/audio
-!webview-ui/build/assets/*.js
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Worker bundles
+# ─────────────────────────────────────────────────────────────────────────────
+!dist/workers/countTokens.js
+# dist/workers/countTokens.js.map intentionally excluded.
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Internationalisation / locale files
+# ─────────────────────────────────────────────────────────────────────────────
+!dist/i18n/**
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# WebAssembly runtimes — required for code parsing and token counting
+# ─────────────────────────────────────────────────────────────────────────────
+!dist/tree-sitter.wasm
+!dist/tree-sitter-*.wasm
+!dist/tiktoken_bg.wasm
+
+# esbuild WASM — required for the code-execution / bundling runtime feature.
+# The bundle requires "esbuild-wasm" at runtime; this file and its bin script
+# provide a self-contained esbuild without a native platform binary.
+# NOTE: this 12 MB WASM is the most likely remaining Marketplace scanner trigger
+# after source maps are removed. If rejection persists, investigate whether the
+# feature can be shimmed to download esbuild lazily on first use instead.
+!dist/esbuild.wasm
+!dist/bin/esbuild
+
+# Go WASM runtime helpers — included conservatively. Verify these are not loaded
+# by any WASM module before removing (none referenced in extension.js currently).
+!dist/wasm_exec.js
+!dist/wasm_exec_node.js
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Webview UI — built assets only; NO source maps
+# ─────────────────────────────────────────────────────────────────────────────
+# index.html is excluded: the extension generates webview HTML dynamically.
+!webview-ui/build/assets/index.js
+!webview-ui/build/assets/index.css
+!webview-ui/build/assets/mermaid-bundle.js
+!webview-ui/build/assets/chunk-*.js
+
+# Fonts (KaTeX math rendering + codicons)
 !webview-ui/build/assets/*.ttf
-!webview-ui/build/assets/*.css
+!webview-ui/build/assets/fonts/*.ttf
 !webview-ui/build/assets/fonts/*.woff
 !webview-ui/build/assets/fonts/*.woff2
-!webview-ui/build/assets/fonts/*.ttf
 
-# Include default themes JSON files used in getTheme
+# Notification / ambient audio
+!webview-ui/audio/*.wav
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Theme defaults (used by getTheme at runtime)
+# ─────────────────────────────────────────────────────────────────────────────
 !integrations/theme/default-themes/**
 
-# Include icons and images
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Icons and image assets
+# ─────────────────────────────────────────────────────────────────────────────
+!assets/icons/**
 !assets/codicons/**
 !assets/vscode-material-icons/**
-!assets/icons/**
 !assets/images/**
 
-# Include .env file for telemetry
-!.env
+
+# ─────────────────────────────────────────────────────────────────────────────
+# INTENTIONALLY EXCLUDED — do not re-add without a documented reason
+# ─────────────────────────────────────────────────────────────────────────────
+# **/*.map
+#   Source maps serve no runtime purpose. The previous !**/*.map rule was pulling
+#   in 15 MB (dist/extension.js.map) + 284 webview chunk .map files (≈ 35 MB raw).
+#   This was almost certainly the primary Marketplace virus-check rejection cause.
+#
+# .env
+#   Must never ship in a published extension. Telemetry keys belong in a
+#   build-time secret, not a file in the VSIX.
+#
+# assets/docs/
+#   Contains demo.gif — marketing asset, not referenced at runtime.
+#
+# webview-ui/build/index.html
+#   Only used in HMR development mode. Production builds generate HTML inline.
+#
+# webview-ui/build/sourcemap-manifest.json
+#   Build artifact; not loaded at runtime.
+#
+# dist/extension.js.map, dist/workers/countTokens.js.map
+#   15 MB + additional. Source maps for debugging only; excluded above by
+#   using selective !dist/... entries instead of !dist.
+#
+# node_modules/
+#   Handled entirely by --no-dependencies flag during vsce package.
+#   Never manually re-include.
