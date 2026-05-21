@@ -1,9 +1,9 @@
 {
-	"name": "asri",
-	"displayName": "%extension.displayName%",
+	"name": "asri-ai",
+	"displayName": "Asri AI",
 	"description": "%extension.description%",
 	"publisher": "asri",
-	"version": "3.53.0",
+	"version": "3.53.4",
 	"icon": "assets/icons/icon.png",
 	"galleryBanner": {
 		"color": "#1a1a2e",
@@ -18,7 +18,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/asri-ai/asri"
+		"url": "https://github.com/mdashrraf/asri-code"
 	},
 	"homepage": "https://asri.ai",
 	"categories": [

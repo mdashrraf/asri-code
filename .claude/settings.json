@@ -1,0 +1,25 @@
+{
+	"permissions": {
+		"allow": [
+			"Bash(git push *)",
+			"Bash(git checkout *)",
+			"Bash(git merge *)",
+			"Bash(gh pr *)",
+			"Bash(git fetch *)",
+			"Bash(git reset *)",
+			"Bash(git branch *)",
+			"Bash(sips -g pixelWidth -g pixelHeight src/assets/icons/icon.png)",
+			"Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\('scripts',{}\\), indent=2\\)\\)\")",
+			"Bash(pnpm build *)",
+			"Bash(git -C /Users/ash/Documents/asri-code/asri-code checkout -b fix/command-ids)",
+			"Bash(python3 -c ' *)",
+			"Bash(git -C /Users/ash/Documents/asri-code/asri-code checkout -b fix/remove-final-release-notice)",
+			"Bash(python3)",
+			"Bash(git -C /Users/ash/Documents/asri-code/asri-code checkout -b fix/welcome-links)",
+			"Bash(git commit -m ' *)",
+			"Bash(git -C /Users/ash/Documents/asri-code/asri-code status --short)",
+			"Bash(xargs ls -lh)",
+			"Bash(grep -v '\\\\.map$')"
+		]
+	}
+}
