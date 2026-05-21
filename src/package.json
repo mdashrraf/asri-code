@@ -1,12 +1,12 @@
 {
-	"name": "roo-cline",
+	"name": "asri",
 	"displayName": "%extension.displayName%",
 	"description": "%extension.description%",
-	"publisher": "RooVeterinaryInc",
+	"publisher": "AsriAI",
 	"version": "3.53.0",
 	"icon": "assets/icons/icon.png",
 	"galleryBanner": {
-		"color": "#617A91",
+		"color": "#1a1a2e",
 		"theme": "dark"
 	},
 	"engines": {
@@ -14,13 +14,13 @@
 		"node": "20.19.2"
 	},
 	"author": {
-		"name": "Roo Code"
+		"name": "Asri"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/RooCodeInc/Roo-Code"
+		"url": "https://github.com/asri-ai/asri"
 	},
-	"homepage": "https://roocodeinc.github.io/Roo-Code/",
+	"homepage": "https://asri.ai",
 	"categories": [
 		"AI",
 		"Chat",
@@ -30,7 +30,7 @@
 		"Testing"
 	],
 	"keywords": [
-		"cline",
+		"asri",
 		"claude",
 		"dev",
 		"mcp",
@@ -42,8 +42,7 @@
 		"sonnet",
 		"ai",
 		"llama",
-		"roo code",
-		"roocode"
+		"cline"
 	],
 	"activationEvents": [
 		"onLanguage",
