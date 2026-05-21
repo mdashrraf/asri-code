@@ -118,7 +118,6 @@
 	"scrollToBottom": "Scroll to bottom of chat",
 	"scrollToLatestCheckpoint": "Scroll to previous checkpoint",
 	"about": "Asri is your AI software execution workspace in your editor",
-	"docs": "Check our <DocsLink>docs</DocsLink> to get started",
 	"onboarding": "What would you like to do?",
 	"rooTips": {
 		"customizableModes": {
