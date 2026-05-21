@@ -2,7 +2,7 @@
 	"name": "asri",
 	"displayName": "%extension.displayName%",
 	"description": "%extension.description%",
-	"publisher": "AsriAI",
+	"publisher": "asri",
 	"version": "3.53.0",
 	"icon": "assets/icons/icon.png",
 	"galleryBanner": {
