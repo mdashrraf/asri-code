@@ -91,7 +91,6 @@
 	"scrollToBottom": "チャットの最下部にスクロール",
 	"scrollToLatestCheckpoint": "前のチェックポイントまでスクロール",
 	"about": "Asriは、エディタに常駐するAI開発チームです。",
-	"docs": "詳細については、<DocsLink>ドキュメント</DocsLink>をご確認ください。",
 	"onboarding": "このワークスペースのタスクリストは空です。",
 	"rooTips": {
 		"customizableModes": {
